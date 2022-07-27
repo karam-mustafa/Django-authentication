@@ -89,4 +89,5 @@ Microsoft Auth: Go to http://localhost:8000/auth/ms (Use the Access Token)
 Check Auth: Go to http://localhost:8000/auth/secure
 
 **Useful Links:**
+
 Google Playground: https://developers.google.com/oauthplayground/
