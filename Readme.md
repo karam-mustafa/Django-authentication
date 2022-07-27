@@ -1,4 +1,4 @@
-# Django Projects Tempate
+# Django Projects - Allauth
 
 ## Table of Contents
 
@@ -12,7 +12,7 @@
 
 ## About <a name = "about"></a>
 
-The project is a n example of the Allauth package usage with Google and Microsoft.
+The project is an example of the Allauth package usage with Google and Microsoft.
 
 ## Getting Started <a name = "getting_started"></a>
 
