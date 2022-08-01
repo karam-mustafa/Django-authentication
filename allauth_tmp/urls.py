@@ -14,13 +14,13 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
-from app.views import GoogleLogin, Secure_api, MSLogin
+from django.urls import path, include
+api_urlpatterns = [
+    path("", include("api.urls")),
+]
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('auth/google/', GoogleLogin.as_view(), name='google_login'),
-    path('auth/secure/', Secure_api.as_view(), name='secure'),
-    path('auth/ms/', MSLogin.as_view(), name='ms'),
-
+    path("api/v1/", include((api_urlpatterns, "api"), namespace="v1")),
 ]
