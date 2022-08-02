@@ -82,11 +82,11 @@ Please use the "app" application to build your customized views.
 
 **For Testing:**
 
-Google Auth: Go to http://localhost:8000/auth/google (Use the Access Token)
+Google Auth: Go tohttp://localhost:8000/api/v1/auth/google (Use the Access Token)
 
-Microsoft Auth: Go to http://localhost:8000/auth/ms (Use the Access Token)
+Microsoft Auth: Go to http://localhost:8000/api/v1/auth/ms (Use the Access Token)
 
-Check Auth: Go to http://localhost:8000/auth/secure
+Check Auth: Go to http://localhost:8000/api/v1/auth/secure
 
 **Useful Links:**
 
