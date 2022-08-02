@@ -3,6 +3,7 @@ from django.contrib.auth.models import (
     BaseUserManager,
     PermissionsMixin,
 )
+from core.models import AbstractAuditModel
 from django.db import models
 
 
@@ -45,7 +46,7 @@ class UserManager(BaseUserManager):
         return user
 
 
-class User(AbstractBaseUser, PermissionsMixin):
+class User(AbstractBaseUser, PermissionsMixin, AbstractAuditModel):
 
     email = models.EmailField(db_index=True, unique=True)
     username = models.CharField(max_length=200, blank=True)
