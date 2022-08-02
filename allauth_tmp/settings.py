@@ -165,7 +165,6 @@ ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
 
-
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
