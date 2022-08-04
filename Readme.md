@@ -18,6 +18,7 @@ The project is an example of the Allauth package usage with Google and Microsoft
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 
+
 ### Prerequisites
 
 What things you need to install the software and how to install them.
@@ -78,7 +79,7 @@ Run Django Server
 $ python manage.py runserver
 ```
 
-Please use the "app" application to build your customized views.
+**Please use the "app" application to build your customized views, note that in settings you need to set the USER_FIRST to False if you want to allow users from outside the app.**
 
 **For Testing:**
 
