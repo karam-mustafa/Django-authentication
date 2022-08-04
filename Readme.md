@@ -79,7 +79,7 @@ Run Django Server
 $ python manage.py runserver
 ```
 
-#f03c15**Please use the "app" application to build your customized views, note that in settings you need to set the USER_FIRST to False if you want to allow users from outside the app.**
+#f03c15 **Please use the "app" application to build your customized views, note that in settings you need to set the USER_FIRST to False if you want to allow users from outside the app.**
 
 **For Testing:**
 
