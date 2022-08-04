@@ -5,6 +5,8 @@ from .models import User
 from allauth.socialaccount.models import EmailAddress
 from django.core.exceptions import ValidationError
 from django.conf import settings
+
+
 class MyCustomAdapter(DefaultAccountAdapter):
     custom_error_messages= {
          "not_active": _(
@@ -31,14 +33,15 @@ class MyCustomSocialAdapter(DefaultSocialAccountAdapter):
 
         def pre_social_login(self, request, sociallogin):
 
-            # # social account already exists, so this is just a login
+            social_email=sociallogin.email_addresses[0].email
+            # social account already exists, so this is just a login
             if sociallogin.is_existing:
                 return
 
-            # # some social logins don't have an email address
+            # some social logins don't have an email address
             if not sociallogin.email_addresses:
                 return
-
+                
             # find the first verified email that we get from this sociallogin
             verified_email = None
             for email in sociallogin.email_addresses:
@@ -49,9 +52,8 @@ class MyCustomSocialAdapter(DefaultSocialAccountAdapter):
             # no verified emails found, nothing more to do
             if not verified_email:
                 return
-
             try:
-                existing_user = User.objects.get(email__iexact=email.email)
+                existing_user = User.objects.get(email__iexact=social_email)
                 existing_user.first_name=sociallogin.user.first_name
                 existing_user.last_name=sociallogin.user.last_name
                 existing_user.save()
