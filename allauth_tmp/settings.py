@@ -148,8 +148,6 @@ STATIC_URL = '/static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-
-
 AUTHENTICATION_BACKENDS = [
     # Needed to login by username in Django admin, regardless of `allauth`
     'django.contrib.auth.backends.ModelBackend',
@@ -157,15 +155,17 @@ AUTHENTICATION_BACKENDS = [
     # `allauth` specific authentication methods, such as login by e-mail
     'allauth.account.auth_backends.AuthenticationBackend',
 ]
-
 AUTH_USER_MODEL = "accounts.User"
 ACCOUNT_USER_MODEL_USERNAME_FIELD = None
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
 ACCOUNT_ADAPTER= 'accounts.adapter.MyCustomAdapter'
+SOCIALACCOUNT_ADAPTER= 'accounts.adapter.MyCustomSocialAdapter'
 REST_USE_JWT = True
 JWT_AUTH_COOKIE = 'jwt-auth'
+USER_FIRST=True
+
 
 LOGGING = {
     'version': 1,

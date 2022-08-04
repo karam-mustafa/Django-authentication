@@ -1,9 +1,10 @@
 from django.utils.translation import gettext_lazy as _
-from django import forms
 from allauth.account.adapter import DefaultAccountAdapter
-
-
-# User = get_user_model()
+from allauth.socialaccount.adapter import DefaultSocialAccountAdapter
+from allauth.account.adapter import get_adapter as get_account_adapter
+from .models import User
+from django.core.exceptions import ValidationError
+from django.conf import settings
 class MyCustomAdapter(DefaultAccountAdapter):
     custom_error_messages= {
          "not_active": _(
@@ -14,4 +15,46 @@ class MyCustomAdapter(DefaultAccountAdapter):
  
 
     def respond_user_inactive(self, request, user):
-        raise forms.ValidationError(self.error_messages["not_active"])
+        raise ValidationError(self.error_messages["not_active"])
+
+
+class MyCustomSocialAdapter(DefaultSocialAccountAdapter):
+    if settings.USER_FIRST:
+
+        custom_error_messages= {
+            "no_user": _(
+                "User Does not exist!"
+            ),
+        }
+        error_messages = dict(list(DefaultAccountAdapter.error_messages.items()) + list(custom_error_messages.items()))
+    
+
+        def pre_social_login(self, request, sociallogin):
+
+            # social account already exists, so this is just a login
+            if sociallogin.is_existing:
+                return
+
+            # some social logins don't have an email address
+            if not sociallogin.email_addresses:
+                return
+
+            # find the first verified email that we get from this sociallogin
+            verified_email = None
+            for email in sociallogin.email_addresses:
+                if email.verified:
+                    verified_email = email
+                    break
+
+            # no verified emails found, nothing more to do
+            if not verified_email:
+                return
+
+            try:
+                existing_user = User.objects.get(email__iexact=email.email)
+            except User.DoesNotExist:
+                raise ValidationError(self.error_messages["no_user"])
+
+            sociallogin.connect(request, existing_user)
+    else:
+        pass

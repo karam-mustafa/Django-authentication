@@ -1,11 +1,13 @@
+import email
 from django.contrib.auth.models import (
     AbstractBaseUser,
     BaseUserManager,
     PermissionsMixin,
 )
+from requests import request
 from core.models import AbstractAuditModel
 from django.db import models
-
+from allauth.socialaccount.models import SocialLogin 
 
 class UserManager(BaseUserManager):
     """
@@ -71,7 +73,9 @@ class User(AbstractBaseUser, PermissionsMixin, AbstractAuditModel):
             return self.email
         return self.first_name
 
+
     class Meta:
         indexes = [
             models.Index(fields=['first_name', 'last_name'])
         ]
+
